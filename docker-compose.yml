@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  nsd:
+    image: xagiwara/nsd-util
+    volumes:
+      - "./conf.d:/etc/nsd/conf.d"
+      - "./zonefiles:/etc/nsd/zonefiles"
+    ports:
+      - "53:53/udp"
+      - "53:53"
