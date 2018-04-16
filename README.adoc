@@ -1,0 +1,45 @@
+= xagiwara/nsd-util
+
+== docker-compose での使用
+
+[source, yaml]
+.docker-compose.yml
+----
+version: "3"
+
+services:
+  nsd:
+    image: xagiwara/nsd-util
+    volumes:
+      - "./conf.d:/etc/nsd/conf.d" # <1>
+      - "./zonefiles:/etc/nsd/zonefiles" # <2>
+    ports:
+      - "53:53/udp"
+      - "53:53"
+----
+
+<1> `confs` に適当にコンフィグファイルを入れる
+<2> `zonefiles` に適当にゾーンファイルを入れる
+
+=== 起動
+
+[source, sh]
+----
+docker-compose up -d
+----
+
+=== 再読み込み
+
+`confs` および `zonefiles` を変更した場合
+
+[source, sh]
+----
+docker-compose exec nsd reload
+----
+
+=== 終了
+
+[source, sh]
+----
+docker-compose down
+----
